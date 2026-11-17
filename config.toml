@@ -8,6 +8,7 @@ theme = "dario"
 
 [params]
   description = "A description of your site that will be used in the meta tags" # a description of your site that will be used in the meta tags
+  mainSections = ["posts", "research", "writeups"]
 
   [params.author]
     name = "Author Name"
@@ -17,6 +18,3 @@ theme = "dario"
 [markup.tableOfContents]
   startLevel = 2
   endLevel = 2
-
-[params]
-  mainSections = ["posts", "research", "writeups"]
