@@ -2,7 +2,6 @@
 subtitle: "" # the subtitle to display on the "/" homepage
 description: "A minimal web log." # The description of the home page that will be used in the open graph meta tags
 ---
-
 A few lines of introduction.
 
 **Contact**: Contact: [you@example.com](mailto:you@example.com) · [GitHub](https://github.com/aquatl) · [LinkedIn](https://linkedin.com/in/your-name)
