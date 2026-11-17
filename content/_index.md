@@ -4,6 +4,10 @@ description: "A minimal web log." # The description of the home page that will b
 ---
 A few lines of introduction.
 
+| Area | Details | Evidence|
+|---|---|---|
+| Web & API exploitation | Web & API exploitation | [JWT lab + writeup](link) |
+
 **Contact**: [you@example.com](mailto:you@example.com) · [GitHub](https://github.com/aquatl) · [LinkedIn](https://linkedin.com/in/your-name)
 
 ## Selected work
