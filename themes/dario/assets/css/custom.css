@@ -151,7 +151,9 @@
 
 
 /* Custom warm background */
-body {
-    background-color: #fad29b;
+body,
+header,
+footer {
+    background-color: #fff2e1;
 }
 
