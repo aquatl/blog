@@ -111,7 +111,7 @@
 
 /* Narrow screens (also what you get when zooming in): contents hidden,
    with a small "Contents" button that expands it above the post */
-@media (max-width: 1199px) {
+@media (max-width: 1300px) {
     .toc-container {
         display: none;
         position: static;
