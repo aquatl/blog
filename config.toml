@@ -1,0 +1,15 @@
+baseURL = "https://<username>.github.io/blog"
+languageCode = "en-us"
+title = "Title"
+
+copyright = "Copyright © 2026 Your Name. All rights reserved."
+
+theme = "dario"
+
+[params]
+  description = "A description of your site that will be used in the meta tags" # a description of your site that will be used in the meta tags
+
+  [params.author]
+    name = "Author Name"
+    email = "yourgmail@gmail.com"
+    twitter = "@twitter"
