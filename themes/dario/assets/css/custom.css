@@ -148,3 +148,10 @@
         display: block;
     }
 }
+
+
+/* Custom warm background */
+body {
+    background-color: #fad29b;
+}
+
