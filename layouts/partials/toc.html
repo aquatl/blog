@@ -1,6 +1,37 @@
 {{ if .TableOfContents }}
-  <aside class="toc-container">
-    <h2>On this page</h2>
-    {{ .TableOfContents }}
-  </aside>
+<button class="toc-open" type="button" aria-controls="toc">Contents</button>
+<aside class="toc-container" id="toc" aria-label="Contents">
+  <button class="toc-close" type="button" aria-label="Hide contents">
+    <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+      <path d="M3 3l16 16M19 3L3 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </button>
+  <h2>Contents</h2>
+  {{ .TableOfContents }}
+</aside>
+<script>
+(function () {
+  var toc = document.getElementById('toc');
+  if (!toc) return;
+  var root = document.documentElement;
+  toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); });
+  document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); });
+
+  var links = Array.prototype.slice.call(toc.querySelectorAll('#TableOfContents a'));
+  var targets = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) targets.push({ el: el, link: a });
+  });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (l) { l.classList.remove('active'); });
+      targets.forEach(function (t) { if (t.el === e.target) t.link.classList.add('active'); });
+    });
+  }, { rootMargin: '0px 0px -70% 0px' });
+  targets.forEach(function (t) { io.observe(t.el); });
+})();
+</script>
 {{ end }}

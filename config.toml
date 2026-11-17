@@ -13,3 +13,7 @@ theme = "dario"
     name = "Author Name"
     email = "yourgmail@gmail.com"
     twitter = "@twitter"
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 2

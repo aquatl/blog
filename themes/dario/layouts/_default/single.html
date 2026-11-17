@@ -14,8 +14,8 @@
     </div>
     {{- end }}
 
+{{ partial "toc.html" . }}
 <div class="article-content">
-    {{ partial "toc.html" . }}
     {{ .Content }}
 </div>
 {{- end }}
