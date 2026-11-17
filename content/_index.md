@@ -3,13 +3,16 @@ subtitle: "" # the subtitle to display on the "/" homepage
 description: "A minimal web log." # The description of the home page that will be used in the open graph meta tags
 ---
 
-I test web applications for security flaws, mostly authorization and API bugs. I'm looking for a pentest or AppSec role. 
-Contact: you@example.com
+A few lines of introduction.
+
+**Contact**: 
+- [you@example.com](mailto:you@example.com)
+- [Github](link-to-your-github-account)
 
 ## Selected work
 
-- [Auth bypass in X's password reset](/research/x-password-reset/): token reuse led to account takeover, fixed in v2.3.
-- [CVE-2026-XXXX: path traversal in Y](/research/cve-2026-xxxx/): root-cause analysis and a minimal patch.
-- [Notable web CTF challenges in 2026](/writeups/web-ctf-2026/): five solves, from SSTI to prototype pollution.
+- [Auth bypass in X's password reset](/research/x-password-reset/)
+- [CVE-2026-XXXX: path traversal in Y](/research/cve-2026-xxxx/)
+- [Notable web CTF challenges in 2026](/writeups/web-ctf-2026/)
 
-Links are to be updated. They don't work yet, as of now, they act as placeholders.
+Links are to be updated.
