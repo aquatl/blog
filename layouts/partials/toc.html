@@ -14,8 +14,8 @@
   var toc = document.getElementById('toc');
   if (!toc) return;
   var root = document.documentElement;
-  toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); });
-  document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); });
+  toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); root.classList.remove('toc-shown'); });
+  document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); root.classList.add('toc-shown'); });
 
   var links = Array.prototype.slice.call(toc.querySelectorAll('#TableOfContents a'));
   var targets = [];

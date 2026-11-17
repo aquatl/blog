@@ -109,9 +109,11 @@
     }
 }
 
-/* Narrow screens: contents shown as a plain block above the post */
+/* Narrow screens (also what you get when zooming in): contents hidden,
+   with a small "Contents" button that expands it above the post */
 @media (max-width: 1199px) {
     .toc-container {
+        display: none;
         position: static;
         padding-block-end: 1rem;
         border-block-end: 1px solid var(--border-color);
@@ -119,5 +121,25 @@
 
     .toc-container h2 {
         margin-block-start: 1rem;
+    }
+
+    .toc-open {
+        display: block;
+        margin-block: 1em 0;
+        padding: 0;
+        font-size: 0.9em;
+        color: var(--muted-text-color);
+    }
+
+    .toc-shown .toc-container {
+        display: block;
+    }
+
+    .toc-shown .toc-open {
+        display: none;
+    }
+
+    .toc-shown .toc-close {
+        display: block;
     }
 }
