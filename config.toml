@@ -8,7 +8,7 @@ theme = "dario"
 
 [params]
   description = "A description of your site that will be used in the meta tags" # a description of your site that will be used in the meta tags
-  mainSections = ["selected-works", "research", "writeups"]
+  mainSections = ["research", "writeups"]
 
   [params.author]
     name = "Author Name"
