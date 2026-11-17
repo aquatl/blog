@@ -46,6 +46,11 @@
 .toc-container a.active {
     color: var(--text-color);
 }
+.toc-container a.active {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
 
 /* "1. 2. 3." numbering for top-level entries */
 #TableOfContents > ul {
