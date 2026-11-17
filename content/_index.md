@@ -2,11 +2,7 @@
 subtitle: "" # the subtitle to display on the "/" homepage
 description: "A minimal web log." # The description of the home page that will be used in the open graph meta tags
 ---
-A few lines of introduction.
-
-| Area | Details | Evidence|
-|---|---|---|
-| Web & API exploitation | Auth/session attacks, JWT internals, object-level authz (IDOR/BOLA, privilege escalation, mass assignment) | [JWT lab + writeup](link) |
+A few lines of introduction about what you do. No need for a whole table.
 
 **Contact**: [you@example.com](mailto:you@example.com) · [GitHub](https://github.com/aquatl) · [LinkedIn](https://linkedin.com/in/your-name)
 
