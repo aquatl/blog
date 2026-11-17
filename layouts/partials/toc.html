@@ -11,34 +11,40 @@
 </aside>
 <script>
 (function () {
-  var toc = document.getElementById('toc');
-  if (!toc) return;
-  var root = document.documentElement;
-  toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); root.classList.remove('toc-shown'); });
-  document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); root.classList.add('toc-shown'); });
+  function init() {
+    var toc = document.getElementById('toc');
+    if (!toc) return;
+    var root = document.documentElement;
+    toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); root.classList.remove('toc-shown'); });
+    document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); root.classList.add('toc-shown'); });
 
-  var links = Array.prototype.slice.call(toc.querySelectorAll('#TableOfContents a'));
-  var targets = [];
-  links.forEach(function (a) {
-    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
-    if (el) targets.push({ el: el, link: a });
-  });
-    function update() {
-    var line = window.innerHeight * 0.3;
-    var current = null;
-    targets.forEach(function (t) {
-      if (t.el.getBoundingClientRect().top <= line) current = t;
+    var links = Array.prototype.slice.call(toc.querySelectorAll('#TableOfContents a'));
+    var targets = [];
+    links.forEach(function (a) {
+      var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+      if (el) targets.push({ el: el, link: a });
     });
-    // at the very bottom of the page, mark the last section
-    if (window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 && targets.length) {
-      current = targets[targets.length - 1];
+    function update() {
+      var line = window.innerHeight * 0.3;
+      var current = null;
+      targets.forEach(function (t) {
+        if (t.el.getBoundingClientRect().top <= line) current = t;
+      });
+      if (window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 && targets.length) {
+        current = targets[targets.length - 1];
+      }
+      links.forEach(function (l) { l.classList.remove('active'); });
+      if (current) current.link.classList.add('active');
     }
-    links.forEach(function (l) { l.classList.remove('active'); });
-    if (current) current.link.classList.add('active');
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 {{ end }}
