@@ -5,9 +5,7 @@ description: "A minimal web log." # The description of the home page that will b
 
 A few lines of introduction.
 
-**Contact**: 
-- [you@example.com](mailto:you@example.com)
-- [Github](link-to-your-github-account)
+**Contact**: Contact: [you@example.com](mailto:you@example.com) · [GitHub](https://github.com/aquatl) · [LinkedIn](https://linkedin.com/in/your-name)
 
 ## Selected work
 
