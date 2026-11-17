@@ -6,7 +6,7 @@ A few lines of introduction.
 
 | Area | Details | Evidence|
 |---|---|---|
-| Web & API exploitation | Web & API exploitation | [JWT lab + writeup](link) |
+| Web & API exploitation | Auth/session attacks, JWT internals, object-level authz (IDOR/BOLA, privilege escalation, mass assignment) | [JWT lab + writeup](link) |
 
 **Contact**: [you@example.com](mailto:you@example.com) · [GitHub](https://github.com/aquatl) · [LinkedIn](https://linkedin.com/in/your-name)
 
