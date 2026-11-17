@@ -83,7 +83,7 @@
 }
 
 /* Wide screens: fixed in the left margin, far left of the viewport */
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
     .toc-container {
         position: fixed;
         inset-block-start: 0;
@@ -116,7 +116,7 @@
 
 /* Narrow screens (also what you get when zooming in): contents hidden,
    with a small "Contents" button that expands it above the post */
-@media (max-width: 899px) {
+@media (max-width: 999px) {
     .toc-container {
         display: none;
         position: static;
