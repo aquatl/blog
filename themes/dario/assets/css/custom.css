@@ -114,13 +114,67 @@
     }
 }
 
-/* Narrow screens (also what you get when zooming in): contents hidden,
-   with a small "Contents" button that expands it above the post */
+/* Narrow screens (phones, or zoomed-in desktop): a slim "Contents" bar is
+   pinned to the very top of the viewport no matter how far you scroll.
+   Tapping it drops the list down over the page. */
 @media (max-width: 999px) {
+    :root {
+        --toc-bar-height: 44px;
+    }
+
+    /* leave room above the site header for the pinned bar, and stop
+       anchor jumps from landing underneath it */
+    body:has(.toc-open) {
+        padding-block-start: var(--toc-bar-height);
+    }
+    html {
+        scroll-padding-block-start: calc(var(--toc-bar-height) + 12px);
+    }
+
+    .toc-open {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        inset-block-start: 0;
+        inset-inline: 0;
+        z-index: 20;
+        box-sizing: border-box;
+        inline-size: 100%;
+        block-size: var(--toc-bar-height);
+        margin: 0;
+        padding-block: 0;
+        padding-inline: var(--content-padding);
+        font-size: 0.9em;
+        line-height: 1;
+        text-align: start;
+        color: var(--muted-text-color);
+        background-color: var(--bg-color);
+        border-block-end: 1px solid var(--border-color);
+    }
+
+    .toc-open::after {
+        content: "\25BE";
+        margin-inline-start: 0.4em;
+    }
+
+    .toc-shown .toc-open::after {
+        content: "\25B4";
+    }
+
     .toc-container {
         display: none;
-        position: static;
-        padding-block-end: 1rem;
+        position: fixed;
+        inset-block-start: var(--toc-bar-height);
+        inset-inline: 0;
+        z-index: 19;
+        box-sizing: border-box;
+        max-block-size: calc(100vh - var(--toc-bar-height));
+        max-block-size: calc(100dvh - var(--toc-bar-height));
+        overflow-y: auto;
+        margin: 0;
+        padding-block: 0 1rem;
+        padding-inline: var(--content-padding);
+        background-color: var(--bg-color);
         border-block-end: 1px solid var(--border-color);
     }
 
@@ -128,32 +182,20 @@
         margin-block-start: 1rem;
     }
 
-    .toc-open {
-        display: block;
-        margin-block: 1em 0;
-        padding: 0;
-        font-size: 0.9em;
-        color: var(--muted-text-color);
-    }
-
     .toc-shown .toc-container {
         display: block;
     }
-
-    .toc-shown .toc-open {
-        display: none;
-    }
-
-    .toc-shown .toc-close {
-        display: block;
-    }
 }
 
 
-/* Custom warm background */
-body,
-header,
-footer {
-    background-color: #fff2e1;
+/* Custom warm background: LIGHT mode only.
+   The theme paints body/header/footer with var(--bg-color), so we change the
+   variable (not the elements). Dark mode keeps the theme's own dark colour. */
+.dark-mode-off:root {
+    --bg-color: #fff2e1;
 }
-
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: #fff2e1;
+    }
+}

@@ -15,8 +15,18 @@
     var toc = document.getElementById('toc');
     if (!toc) return;
     var root = document.documentElement;
-    toc.querySelector('.toc-close').addEventListener('click', function () { root.classList.add('toc-hidden'); root.classList.remove('toc-shown'); });
-    document.querySelector('.toc-open').addEventListener('click', function () { root.classList.remove('toc-hidden'); root.classList.add('toc-shown'); });
+    var narrow = window.matchMedia('(max-width: 999px)');
+    function closeToc() { root.classList.add('toc-hidden'); root.classList.remove('toc-shown'); }
+    function openToc() { root.classList.remove('toc-hidden'); root.classList.add('toc-shown'); }
+    toc.querySelector('.toc-close').addEventListener('click', closeToc);
+    document.querySelector('.toc-open').addEventListener('click', function () {
+      // on phones the bar is a toggle; on wide screens it only re-opens the sidebar
+      if (narrow.matches && root.classList.contains('toc-shown')) closeToc(); else openToc();
+    });
+    // on phones, tapping an entry should jump there and get the list out of the way
+    toc.addEventListener('click', function (e) {
+      if (narrow.matches && e.target.closest('#TableOfContents a')) closeToc();
+    });
 
     var links = Array.prototype.slice.call(toc.querySelectorAll('#TableOfContents a'));
     var targets = [];

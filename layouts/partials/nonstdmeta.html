@@ -1,0 +1,9 @@
+{{- /* Picked up automatically by the theme's head.html.
+       Drop a favicon.svg and/or favicon.png into /static and it is linked here.
+       (favicon.ico and apple-touch-icon.png are already handled by the theme.) */ -}}
+{{- if fileExists "static/favicon.svg" }}
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+{{- end }}
+{{- if fileExists "static/favicon.png" }}
+<link rel="icon" type="image/png" href="{{ "favicon.png" | relURL }}">
+{{- end }}
