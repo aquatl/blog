@@ -274,3 +274,24 @@ footer {
     background-color: inherit;
     transition: none;
 }
+
+/* Humbler section headings (they were 1.6em) */
+h2 {
+    font-size: 1.3em;
+    margin-block-start: 1.3em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+/* Mild orange text selection */
+::selection {
+    background-color: rgba(217, 119, 87, 0.3);
+    color: inherit;
+}
+
+::-moz-selection {
+    background-color: rgba(217, 119, 87, 0.3);
+    color: inherit;
+}
