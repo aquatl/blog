@@ -36,6 +36,8 @@ function setDarkMode(isDarkMode) {
 // User-initiated switch. Where supported, the whole page crossfades as ONE
 // snapshot, so header, body and footer can never get out of sync, even when
 // the toggle is flipped very quickly. Other browsers use the CSS transitions.
+let themeSwitchId = 0;
+
 function switchDarkMode(isDarkMode) {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -45,9 +47,15 @@ function switchDarkMode(isDarkMode) {
     return;
   }
 
+  // Fast flips start a new transition while the previous one is still
+  // finishing. Only the newest transition may lift the "pause CSS transitions"
+  // class, otherwise the CSS transitions would restart mid-crossfade.
+  const id = ++themeSwitchId;
   root.classList.add("theme-vt");
   const transition = document.startViewTransition(() => applyDarkMode(isDarkMode));
-  transition.finished.finally(() => root.classList.remove("theme-vt"));
+  transition.finished.finally(() => {
+    if (id === themeSwitchId) root.classList.remove("theme-vt");
+  });
 }
 
 function handleDarkModeToggle(event) {

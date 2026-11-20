@@ -265,3 +265,12 @@
     animation-duration: 0.2s;
     animation-timing-function: ease;
 }
+
+/* Header and footer take their background from <body> instead of painting
+   their own copy of it. With no transition of their own they always match the
+   body exactly, in browsers that fall back to plain CSS transitions too. */
+header,
+footer {
+    background-color: inherit;
+    transition: none;
+}
