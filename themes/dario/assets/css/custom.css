@@ -251,3 +251,17 @@
 .contact .copied .icon-check {
     display: block;
 }
+
+/* Dark/light switch: one synchronized page crossfade (see darkmode.js).
+   The per-element CSS transitions are paused so they don't fight with it. */
+.theme-vt *,
+.theme-vt *::before,
+.theme-vt *::after {
+    transition: none !important;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+}

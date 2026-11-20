@@ -1,5 +1,18 @@
 "use strict";
 
+function applyDarkMode(isDarkMode) {
+  document.documentElement.classList.toggle("dark-mode-on", isDarkMode);
+
+  // Set dark-mode-off to override media query styles
+  document.documentElement.classList.toggle("dark-mode-off", !isDarkMode);
+
+  // Update the toggle switch state
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  if (darkModeToggle) {
+    darkModeToggle.checked = isDarkMode;
+  }
+}
+
 function setDarkMode(isDarkMode) {
   const initialReadyState = document.readyState;
 
@@ -16,26 +29,38 @@ function setDarkMode(isDarkMode) {
       });
     }
 
-    document.documentElement.classList.toggle("dark-mode-on", isDarkMode);
-
-    // Set dark-mode-off to override media query styles
-    document.documentElement.classList.toggle("dark-mode-off", !isDarkMode);
-
-    // Update the toggle switch state
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    if (darkModeToggle) {
-      darkModeToggle.checked = isDarkMode;
-    }
+    applyDarkMode(isDarkMode);
   });
 }
 
-function handleDarkModeToggle() {
-  const isDarkMode = document.documentElement.classList.contains("dark-mode-on");
-  const newMode = !isDarkMode;
+// User-initiated switch. Where supported, the whole page crossfades as ONE
+// snapshot, so header, body and footer can never get out of sync, even when
+// the toggle is flipped very quickly. Other browsers use the CSS transitions.
+function switchDarkMode(isDarkMode) {
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!document.startViewTransition || reduceMotion) {
+    applyDarkMode(isDarkMode);
+    return;
+  }
+
+  root.classList.add("theme-vt");
+  const transition = document.startViewTransition(() => applyDarkMode(isDarkMode));
+  transition.finished.finally(() => root.classList.remove("theme-vt"));
+}
+
+function handleDarkModeToggle(event) {
+  // Read the switch itself (not the page class): during a fast flip the class
+  // may not have been updated yet, and we must never miss a click.
+  const newMode =
+    event && event.target && typeof event.target.checked === "boolean"
+      ? event.target.checked
+      : !document.documentElement.classList.contains("dark-mode-on");
 
   // Update localStorage and UI state together
   localStorage.setItem("darkMode", newMode ? "enabled" : "disabled");
-  setDarkMode(newMode);
+  switchDarkMode(newMode);
 }
 
 function initDarkMode() {
