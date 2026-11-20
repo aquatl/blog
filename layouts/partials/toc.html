@@ -1,5 +1,9 @@
 {{ if .TableOfContents }}
-<button class="toc-open" type="button" aria-controls="toc">Contents</button>
+<button class="toc-open" type="button" aria-controls="toc" aria-label="Table of contents">
+  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+    <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </svg>
+</button>
 <aside class="toc-container" id="toc" aria-label="Contents">
   <button class="toc-close" type="button" aria-label="Hide contents">
     <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">

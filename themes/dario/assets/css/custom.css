@@ -80,6 +80,14 @@
 
 .toc-open {
     display: none;
+    padding: 0;
+    line-height: 0;
+}
+
+.toc-open:focus-visible,
+.toc-close:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 3px;
 }
 
 /* Wide screens: fixed in the left margin, far left of the viewport */
@@ -109,67 +117,70 @@
         position: fixed;
         inset-block-start: 28px;
         inset-inline-start: 2rem;
-        font-size: 0.9em;
-        color: var(--muted-text-color);
+        color: var(--text-color);
     }
 }
 
-/* Narrow screens (phones, or zoomed-in desktop): a slim "Contents" bar is
-   pinned to the very top of the viewport no matter how far you scroll.
-   Tapping it drops the list down over the page. */
+/* Narrow screens (phones, or zoomed-in desktop): the site header
+   (Title, dark-mode toggle, and the contents icon) is pinned to the top. */
 @media (max-width: 999px) {
     :root {
-        --toc-bar-height: 44px;
+        --header-height: 64px;
+        /* distance from the viewport's right edge to the content's right edge */
+        --content-edge: calc(max(0px, (100vw - var(--content-max-inline-size)) / 2) + var(--content-padding));
     }
 
-    /* leave room above the site header for the pinned bar, and stop
-       anchor jumps from landing underneath it */
-    body:has(.toc-open) {
-        padding-block-start: var(--toc-bar-height);
-    }
     html {
-        scroll-padding-block-start: calc(var(--toc-bar-height) + 12px);
+        scroll-padding-block-start: calc(var(--header-height) + 12px);
     }
 
-    .toc-open {
-        display: flex;
-        align-items: center;
-        position: fixed;
+    header {
+        position: sticky;
         inset-block-start: 0;
-        inset-inline: 0;
         z-index: 20;
         box-sizing: border-box;
-        inline-size: 100%;
-        block-size: var(--toc-bar-height);
+        block-size: var(--header-height);
         margin: 0;
-        padding-block: 0;
-        padding-inline: var(--content-padding);
-        font-size: 0.9em;
-        line-height: 1;
-        text-align: start;
-        color: var(--muted-text-color);
-        background-color: var(--bg-color);
+        padding-block: 10px;
         border-block-end: 1px solid var(--border-color);
     }
 
-    .toc-open::after {
-        content: "\25BE";
-        margin-inline-start: 0.4em;
+    .content-wrapper {
+        padding-block-start: 1rem;
     }
 
-    .toc-shown .toc-open::after {
-        content: "\25B4";
+    /* contents icon sits to the right of the dark-mode toggle */
+    .toc-open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        inset-block-start: 10px;
+        inset-inline-end: var(--content-edge);
+        z-index: 21;
+        block-size: 44px;
+        inline-size: 30px;
+        color: var(--muted-text-color);
+    }
+
+    .toc-open:hover,
+    .toc-shown .toc-open {
+        color: var(--text-color);
+    }
+
+    body:has(.toc-open) .header-controls {
+        margin-inline-end: 42px;
     }
 
     .toc-container {
         display: none;
         position: fixed;
-        inset-block-start: var(--toc-bar-height);
+        inset-block-start: var(--header-height);
         inset-inline: 0;
         z-index: 19;
         box-sizing: border-box;
-        max-block-size: calc(100vh - var(--toc-bar-height));
-        max-block-size: calc(100dvh - var(--toc-bar-height));
+        max-block-size: calc(100vh - var(--header-height));
+        max-block-size: calc(100dvh - var(--header-height));
         overflow-y: auto;
         margin: 0;
         padding-block: 0 1rem;
