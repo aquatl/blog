@@ -211,9 +211,43 @@
     }
 }
 
-/* Contact row: links stay whole and wrap cleanly, with no stray separators */
+/* Contact row: monochrome icon links, 40px tap targets */
 .contact {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem 1.5rem;
+    gap: 0.25rem;
+    /* pull the first icon's edge in line with the text column */
+    margin-inline-start: -9px;
+}
+
+.contact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 40px;
+    block-size: 40px;
+    color: var(--text-color);
+    text-decoration: none;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.contact a:hover {
+    opacity: 0.7;
+}
+
+.contact a:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 0;
+    border-radius: 6px;
+}
+
+.contact .icon-check,
+.contact .copied .icon-mail {
+    display: none;
+}
+
+.contact .copied .icon-check {
+    display: block;
 }
