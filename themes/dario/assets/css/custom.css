@@ -210,3 +210,10 @@
         --bg-color: #fff2e1;
     }
 }
+
+/* Contact row: links stay whole and wrap cleanly, with no stray separators */
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.5rem;
+}

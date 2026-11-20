@@ -1,0 +1,36 @@
+{{- $email := .Get "email" -}}
+<p class="contact">
+  {{- with $email }}<a class="contact-email" href="mailto:{{ . }}" data-email="{{ . }}" title="{{ . }}">Email</a>{{ end -}}
+  {{- with .Get "github" }}<a href="{{ . }}">GitHub</a>{{ end -}}
+  {{- with .Get "linkedin" }}<a href="{{ . }}">LinkedIn</a>{{ end -}}
+</p>
+<script>
+(function () {
+  var link = document.querySelector('.contact-email');
+  if (!link) return;
+  // Phones almost always have a mail app, so let mailto: work there.
+  // On desktop (mouse), copy the address instead, which works for everyone.
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var label = link.textContent, timer;
+  function done() {
+    link.textContent = 'Copied!';
+    clearTimeout(timer);
+    timer = setTimeout(function () { link.textContent = label; }, 1500);
+  }
+  link.addEventListener('click', function (e) {
+    var addr = link.dataset.email;
+    if (navigator.clipboard && window.isSecureContext) {
+      e.preventDefault();
+      navigator.clipboard.writeText(addr).then(done, function () { window.location.href = 'mailto:' + addr; });
+    } else {
+      var t = document.createElement('textarea');
+      t.value = addr; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) {}
+      document.body.removeChild(t);
+      if (ok) { e.preventDefault(); done(); }
+    }
+  });
+})();
+</script>
